@@ -1,0 +1,14 @@
+under dockerBuild.groovy
+def call (String project, String ImageTag, String hubUser ){
+    sh """
+        docker image build -t ${hubUser}/${project} .
+        docker image tag ${hubUser}/${project} ${hubUser}/${project}:${ImageTag}
+        docker image tag ${hubUser}/${project} ${hubUser}/${project}:latest
+
+    """
+}
+- in the def call function we are building the image and tagging it with the ImageTag and latest tag
+- but in the parameters we are passing the first parameter as project 
+and in the sh file first line 
+it will take the project as hubUser
+- and hubUser as the third parameter we need to change the value in the jenkinsfile, previously it was AppName, we changed that to hubUser
